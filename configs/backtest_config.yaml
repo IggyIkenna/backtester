@@ -1,0 +1,58 @@
+backtest:
+  start_date: '2023-01-01'
+  end_date: '2023-01-15'
+  symbol: 'BTCUSDT'
+  data_dir: 'backtester/data/raw/market_data_2425d_20241220_165609/binance-futures/'
+  features_dir: 'backtester/data/features/current'
+  results_dir: 'results/'
+  continue_on_error: false
+  
+  time:
+    candle_period: '1h'
+    signal_period: '4h'
+    signal_start_hour: 0
+    signal_start_day: 'monday'
+    allow_overnight: true
+    trading_hours: [9, 16]
+    trading_days: ['monday']
+    trading_disabled_datetime: [['2023-01-02 00:00:00', '2023-01-02 23:59:59'], ['2024-01-02 00:00:00', '2024-01-02 23:59:59']]
+    trading_disabled_hours: [[3, 4], [11, 12]]
+  
+  features:
+    feature_groups: ['MACD', 'VOLUME_METRICS', 'SEASONALITY']
+
+strategy:
+  position_size: 100000
+  leverage: 1.0
+  entry_bps: 0
+  exit_bps: 0
+  rebalance_threshold: 0.01
+  fast_period: 8
+  slow_period: 21
+  signal_period: 5
+  zscore_weekly_threshold: 2.0
+  zscore_monthly_threshold: 3.0
+
+execution:
+  maker_fee_bps: 0
+  taker_fee_bps: 0
+  simulated_spread_bps: 1.0
+  max_spread_bps: 10.0
+  min_order_size_usd: 100
+  max_order_size_usd: 400000
+  min_position_size_usd: 1000
+  max_position_size_usd: 150000
+  max_position_coins: 999999999
+  max_leverage: 2.0
+  max_drawdown: 0.1
+  max_volatility: 1
+  concentration_limit: 1
+  price_update_threshold: 0.005
+  taker_conversion_hours: 2
+  use_stochastic_oscillator: true
+  use_momentum: true
+  use_dynamic_spread: true
+
+logging:
+  level: 'DEBUG'
+  log_dir: 'logs' 

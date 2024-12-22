@@ -1,0 +1,571 @@
+{
+    "price_action": {
+        "macd": {
+            "description": "Moving Average Convergence Divergence features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "combinations": [
+                    {"fast_period": 12, "slow_period": 26, "signal_period": 9},
+                    {"fast_period": 8, "slow_period": 21, "signal_period": 5},
+                    {"fast_period": 21, "slow_period": 55, "signal_period": 9},
+                    {"fast_period": 5, "slow_period": 35, "signal_period": 5}
+                ],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "line": "MACD line (Fast EMA - Slow EMA)",
+                    "signal": "Signal line (EMA of MACD)",
+                    "hist": "MACD histogram (MACD - Signal)",
+                    "cross": "Signal line crossovers (1: bullish, -1: bearish, 0: none)",
+                    "time_since_bull_cross": "Periods since last bullish signal line cross",
+                    "time_since_bear_cross": "Periods since last bearish signal line cross",
+                    "zero_cross": "Zero-line crossovers (1: bullish, -1: bearish, 0: none)",
+                    "time_since_zero_bull_cross": "Periods since last bullish zero-line cross",
+                    "time_since_zero_bear_cross": "Periods since last bearish zero-line cross"
+                },
+                "z_scores": {
+                    "metrics": ["line", "signal", "hist"],
+                    "changes": ["line_change", "signal_change", "hist_change"]
+                }
+            },
+            "data_requirements": {
+                "price": ["close"],
+                "lookback": "max(slow_period) + max(zscore_periods)"
+            }
+        },
+        "stochastic": {
+            "description": "Stochastic Oscillator features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "combinations": [
+                    {"k_period": 5, "d_period": 3, "smooth_k": 3},
+                    {"k_period": 8, "d_period": 3, "smooth_k": 3},
+                    {"k_period": 12, "d_period": 3, "smooth_k": 3},
+                    {"k_period": 21, "d_period": 3, "smooth_k": 3}
+                ],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "k": "Fast %K line",
+                    "d": "Slow %D line",
+                    "cross": "Signal line crossovers (1: bullish, -1: bearish, 0: none)",
+                    "overbought": "Overbought condition (>80)",
+                    "oversold": "Oversold condition (<20)"
+                },
+                "z_scores": {
+                    "metrics": ["k", "d"]
+                }
+            },
+            "data_requirements": {
+                "price": ["high", "low", "close"],
+                "lookback": "max(k_period) + max(zscore_periods)"
+            }
+        },
+        "rsi": {
+            "description": "Relative Strength Index features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "combinations": [
+                    {
+                        "period": 14,
+                        "oversold_levels": [20, 30, 40],
+                        "overbought_levels": [60, 70, 80]
+                    },
+                    {
+                        "period": 7,
+                        "oversold_levels": [20, 30, 40],
+                        "overbought_levels": [60, 70, 80]
+                    },
+                    {
+                        "period": 21,
+                        "oversold_levels": [20, 30, 40],
+                        "overbought_levels": [60, 70, 80]
+                    }
+                ],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "value": "Raw RSI value",
+                    "change": "RSI change",
+                    "overbought": "Overbought conditions",
+                    "oversold": "Oversold conditions",
+                    "time_since_overbought": "Periods since last overbought condition",
+                    "time_since_oversold": "Periods since last oversold condition",
+                    "dist_overbought": "Distance from overbought levels",
+                    "dist_oversold": "Distance from oversold levels"
+                },
+                "z_scores": {
+                    "metrics": ["value", "change"]
+                }
+            },
+            "data_requirements": {
+                "price": ["close"],
+                "lookback": "max(period) + max(zscore_periods)"
+            }
+        },
+        "bollinger": {
+            "description": "Bollinger Bands features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "combinations": [
+                    {
+                        "period": 20,
+                        "num_std": 2.0,
+                        "squeeze_threshold": 0.5
+                    },
+                    {
+                        "period": 10,
+                        "num_std": 2.0,
+                        "squeeze_threshold": 0.5
+                    },
+                    {
+                        "period": 14,
+                        "num_std": 2.0,
+                        "squeeze_threshold": 0.5
+                    },
+                    {
+                        "period": 30,
+                        "num_std": 2.0,
+                        "squeeze_threshold": 0.5
+                    }
+                ],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "mean": "Moving average (middle band)",
+                    "upper": "Upper band",
+                    "lower": "Lower band",
+                    "width": "Band width percentage",
+                    "position": "Position within bands (0-100%)",
+                    "upper_touch": "Price touched upper band",
+                    "lower_touch": "Price touched lower band",
+                    "time_since_upper_touch": "Periods since last upper band touch",
+                    "time_since_lower_touch": "Periods since last lower band touch",
+                    "squeeze": "Band squeeze indicator",
+                    "time_since_squeeze": "Periods since last squeeze condition",
+                    "upper_dist": "Distance to upper band (%)",
+                    "lower_dist": "Distance to lower band (%)",
+                    "atr": "Average True Range",
+                    "atr_pct": "ATR as percentage of price"
+                },
+                "z_scores": {
+                    "metrics": ["width", "position", "atr"]
+                }
+            },
+            "data_requirements": {
+                "price": ["high", "low", "close"],
+                "lookback": "max(period) + max(zscore_periods)"
+            }
+        },
+        "returns": {
+            "description": "Return-based features including log returns, percentage returns, and return volatility",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "lags": [1, 2, 3, 4, 5, 10, 20, 50],
+                "vol_windows": [5, 10, 20, 50],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "log": "Log returns at different lags",
+                    "pct": "Percentage returns at different lags",
+                    "vol": "Return volatility over different windows",
+                    "cum_log": "Cumulative log returns",
+                    "cum_pct": "Cumulative percentage returns"
+                },
+                "z_scores": {
+                    "metrics": ["log", "pct", "vol", "cum_log", "cum_pct"]
+                }
+            },
+            "data_requirements": {
+                "price": ["close"],
+                "lookback": "max(lags, vol_windows) + max(zscore_periods)"
+            }
+        }
+    },
+    "relationship": {
+        "description": "Relationship metrics with BTC",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "correlation_windows": [24, 72, 168, 336, 720],
+            "beta_windows": [24, 72, 168, 336, 720],
+            "relative_strength_windows": [24, 72, 168, 336, 720],
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "correlation": "Rolling correlation with BTC returns",
+                "beta": "Rolling beta (regression slope) with BTC",
+                "rel_strength": "Relative performance vs BTC",
+                "rel_vol": "Relative volatility vs BTC",
+                "log_spread": "Log price spread between asset and BTC"
+            },
+            "z_scores": {
+                "metrics": ["correlation", "beta", "rel_strength", "rel_vol", "log_spread"]
+            }
+        },
+        "data_requirements": {
+            "price": ["close"],
+            "external": {
+                "btc": "BTC price data in data/raw/market_data_*/binance-futures/BTCUSDT.csv"
+            },
+            "lookback": "max(correlation_windows, beta_windows, relative_strength_windows) + max(zscore_periods)"
+        }
+    },
+    "volume": {
+        "volume_metrics": {
+            "description": "Volume-based metrics with rolling windows and categorical periods",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "rolling_windows": [1, 4, 12, 24, 48, 72, 168],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "total": "Total quote volume",
+                    "buy": "Buy quote volume",
+                    "buy_ratio": "Buy/Total quote volume ratio",
+                    "concentration": "Quote volume concentration"
+                },
+                "z_scores": {
+                    "metrics": ["total", "buy_ratio", "concentration"]
+                }
+            },
+            "data_requirements": {
+                "volume": ["quote_volume", "taker_buy_quote_volume"],
+                "lookback": "max(rolling_windows) + max(zscore_periods)"
+            }
+        },
+        "volume_momentum": {
+            "description": "Volume Momentum features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "momentum_periods": [5, 10, 20, 50],
+                "volume_ratio_periods": [24, 72, 168],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "volume_momentum": "Volume rate of change",
+                    "buy_ratio_momentum": "Buy ratio rate of change",
+                    "cum_volume_momentum": "Cumulative volume momentum",
+                    "volume_ratio": "Volume relative to moving average",
+                    "buy_volume_ratio": "Buy volume relative to moving average"
+                },
+                "z_scores": {
+                    "metrics": ["volume_momentum", "buy_ratio_momentum", "volume_ratio"]
+                }
+            },
+            "data_requirements": {
+                "volume": ["quote_volume", "taker_buy_quote_volume"],
+                "lookback": "max(momentum_periods, volume_ratio_periods) + max(zscore_periods)"
+            }
+        },
+        "volume_profile": {
+            "description": "Volume Profile features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "num_bins": 100,
+                "value_area_pct": 0.70,
+                "hvn_threshold": 1.5,
+                "lvn_threshold": 0.5,
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "poc": "Point of Control price level",
+                    "vah": "Value Area High price level",
+                    "val": "Value Area Low price level",
+                    "hvn": "High Volume Node levels",
+                    "lvn": "Low Volume Node levels"
+                },
+                "z_scores": {
+                    "metrics": ["poc_distance", "va_width"]
+                }
+            },
+            "data_requirements": {
+                "price": ["high", "low", "close"],
+                "volume": ["quote_volume"],
+                "lookback": "max(zscore_periods)"
+            }
+        },
+        "vwap": {
+            "description": "Volume Weighted Average Price features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "periods": [5, 8, 10, 12, 14, 20, 21, 26, 30, 50, 55, 100, 200],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "value": "VWAP price level",
+                    "distance": "Price distance from VWAP",
+                    "above": "Price above VWAP (binary)",
+                    "below": "Price below VWAP (binary)"
+                },
+                "z_scores": {
+                    "metrics": ["distance"]
+                }
+            },
+            "data_requirements": {
+                "price": ["high", "low", "close"],
+                "volume": ["quote_volume"],
+                "lookback": "max(periods) + max(zscore_periods)"
+            }
+        }
+    },
+    "patterns": {
+        "candle_patterns": {
+            "description": "Candlestick Pattern features",
+            "timeframes": ["1h", "4h", "24h"],
+            "parameters": {
+                "combinations": [
+                    {
+                        "doji_threshold": 0.1,
+                        "shadow_threshold": 2.0,
+                        "pattern_window": 20
+                    },
+                    {
+                        "doji_threshold": 0.15,
+                        "shadow_threshold": 2.5,
+                        "pattern_window": 30
+                    }
+                ],
+                "zscore_periods": [168, 720]
+            },
+            "feature_types": {
+                "base_metrics": {
+                    "doji": "Doji patterns",
+                    "hammer": "Hammer patterns",
+                    "shooting_star": "Shooting Star patterns",
+                    "engulfing": "Engulfing patterns",
+                    "three_white": "Three White Soldiers",
+                    "three_black": "Three Black Crows",
+                    "morning_star": "Morning Star pattern",
+                    "evening_star": "Evening Star pattern",
+                    "inside_bar": "Inside Bar pattern",
+                    "outside_bar": "Outside Bar pattern"
+                },
+                "z_scores": {
+                    "metrics": ["pattern_strength"]
+                }
+            },
+            "data_requirements": {
+                "price": ["open", "high", "low", "close"],
+                "lookback": "max(pattern_window) + max(zscore_periods)"
+            }
+        }
+    },
+    "market_structure": {
+        "description": "Market Structure Analysis features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "swing_periods": [5, 10, 20, 50],
+            "strength_threshold": [1.5, 2.0, 2.5],
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "hh": "Higher High",
+                "lh": "Lower High",
+                "hl": "Higher Low",
+                "ll": "Lower Low",
+                "break": "Structure break signals",
+                "strength": "Swing point strength",
+                "trend": "Overall trend direction",
+                "context": "Market structure context"
+            },
+            "z_scores": {
+                "metrics": ["strength"]
+            }
+        },
+        "data_requirements": {
+            "price": ["high", "low"],
+            "lookback": "max(swing_periods) + max(zscore_periods)"
+        }
+    },
+    "price_levels": {
+        "description": "Price Levels Analysis features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "major_levels": [1000, 5000, 10000, 20000, 30000, 40000, 50000],
+            "minor_levels": [1000, 2000, 3000, 4000, 5000],
+            "level_margin": 0.01,
+            "interaction_window": 20,
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "major_up": "Next major level above",
+                "major_down": "Next major level below",
+                "minor_up": "Next minor level above",
+                "minor_down": "Next minor level below",
+                "strength": "Level interaction strength",
+                "cluster": "Level clustering",
+                "support": "Dynamic support levels",
+                "resistance": "Dynamic resistance levels"
+            },
+            "z_scores": {
+                "metrics": ["distance", "strength"]
+            }
+        },
+        "data_requirements": {
+            "price": ["high", "low", "close"],
+            "lookback": "interaction_window + max(zscore_periods)"
+        }
+    },
+    "streaks": {
+        "description": "Price and Volume Streak Analysis features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "volatility_threshold": 0.5,
+            "volume_threshold": 1.5,
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "price_up": "Consecutive price increases",
+                "price_down": "Consecutive price decreases",
+                "volume_up": "Consecutive volume increases",
+                "volume_down": "Consecutive volume decreases",
+                "volatility_up": "Consecutive volatility increases",
+                "volatility_down": "Consecutive volatility decreases",
+                "strength": "Streak strength",
+                "reversal": "Streak reversal signals"
+            },
+            "z_scores": {
+                "metrics": ["streak_length", "strength"]
+            }
+        },
+        "data_requirements": {
+            "price": ["close"],
+            "volume": ["quote_volume"],
+            "lookback": "max(zscore_periods)"
+        }
+    },
+    "time_ranges": {
+        "description": "Time-based Range Analysis features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "modes": ["complete", "developing"]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "high": "Range high price",
+                "low": "Range low price",
+                "mid": "Range midpoint price",
+                "width": "Range width",
+                "position": "Current price position in range",
+                "breakout": "Range breakout signals",
+                "strength": "Range boundary strength"
+            }
+        },
+        "data_requirements": {
+            "price": ["high", "low", "close"],
+            "lookback": "session_length"
+        }
+    },
+    "funding_rates": {
+        "description": "Funding Rate Analysis features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "rolling_windows": [8, 24, 72, 168],
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "rate": "Current funding rate",
+                "cumulative": "Cumulative funding rate",
+                "direction": "Rate direction (positive/negative)",
+                "extreme": "Extreme rate conditions",
+                "acceleration": "Rate change acceleration",
+                "regime": "Funding rate regime"
+            },
+            "z_scores": {
+                "metrics": ["rate", "cumulative"]
+            }
+        },
+        "data_requirements": {
+            "external": ["funding_rate"],
+            "lookback": "max(rolling_windows) + max(zscore_periods)"
+        }
+    },
+    "volatility_regime": {
+        "description": "Volatility Regime Analysis features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "short_window": 24,
+            "medium_window": 168,
+            "long_window": 720,
+            "num_regimes": 3,
+            "transition_window": 12,
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "base_metrics": {
+                "regime": "Current volatility regime",
+                "duration": "Regime duration",
+                "stability": "Regime stability",
+                "intensity": "Regime intensity",
+                "transition_prob": "Regime transition probability",
+                "forecast": "Regime forecast",
+                "context": "Regime market context"
+            },
+            "z_scores": {
+                "metrics": ["duration", "stability", "intensity"]
+            }
+        },
+        "data_requirements": {
+            "price": ["high", "low", "close"],
+            "volume": ["quote_volume"],
+            "lookback": "max(long_window) + max(zscore_periods)"
+        }
+    },
+    "alternative": {
+        "description": "Alternative Data features",
+        "timeframes": ["1h", "4h", "24h"],
+        "parameters": {
+            "rolling_windows": [24, 72, 168, 336, 720],
+            "zscore_periods": [168, 720]
+        },
+        "feature_types": {
+            "vix": {
+                "metrics": ["close", "ma", "vs_ma", "daily_change", "weekly_change"],
+                "z_scores": ["close", "daily_change"]
+            },
+            "fear_and_greed": {
+                "metrics": ["value", "ma", "vs_ma", "daily_change", "weekly_change"],
+                "z_scores": ["value", "daily_change"]
+            },
+            "cycle": {
+                "metrics": ["cycle_year", "days_to_halving", "days_since_halving", "is_halving", "high_mrv"]
+            }
+        },
+        "data_requirements": {
+            "external": {
+                "vix": "CBOE VIX data in backtester/data/raw/market_data_*/cboe/VIX.csv",
+                "fear_greed": "Fear and Greed data in backtester/data/features/fear_and_greed/*.csv",
+                "cycle": "Hardcoded halving dates and MRV periods"
+            },
+            "lookback": "max(rolling_windows) + max(zscore_periods)"
+        }
+    },
+    "seasonality": {
+        "description": "Time-based Seasonality features",
+        "timeframes": ["1h", "4h", "24h"],
+        "feature_types": {
+            "time": {
+                "metrics": ["quarter", "cycle_year", "is_weekend", "is_us_session", "is_asia_session", "is_london_session"]
+            }
+        },
+        "data_requirements": {
+            "external": {
+                "session_times": "Trading session times configuration"
+            }
+        }
+    }
+} 
