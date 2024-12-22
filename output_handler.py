@@ -9,10 +9,10 @@ from pathlib import Path
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-from backtester.utils.types import BacktestState, Trade
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.utils.exceptions import DataOutputError, StrategyError, MetricsError
-from backtester.utils.error_handler import BacktestErrorHandler
+from utils.types import BacktestState, Trade
+from configs.backtester_config import BacktestConfig
+from utils.exceptions import DataOutputError, StrategyError, MetricsError
+from utils.error_handler import BacktestErrorHandler
 
 class OutputHandler:
     """Handles backtest output, logging, and performance analysis"""

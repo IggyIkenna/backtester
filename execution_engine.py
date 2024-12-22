@@ -4,13 +4,13 @@ import pandas as pd
 import logging
 import uuid
 
-from backtester.utils.error_handler import BacktestErrorHandler
-from backtester.utils.types import (
+from utils.error_handler import BacktestErrorHandler
+from utils.types import (
     MarketState, BacktestState, OrderState,
     Trade, Signal, Side, OrderType, OrderStatus, TradingState
 )
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.utils.exceptions import SignalError, OrderError
+from configs.backtester_config import BacktestConfig
+from utils.exceptions import SignalError, OrderError
 
 
 class ExecutionEngine:

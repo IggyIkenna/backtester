@@ -10,7 +10,7 @@ import pandas as pd
 import uuid
 
 
-from backtester.configs.backtester_config import ExecutionConfig
+from configs.backtester_config import ExecutionConfig
 
 class OrderStatus(Enum):
     PENDING = "pending"

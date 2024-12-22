@@ -2,12 +2,12 @@
 from typing import Tuple, List
 import logging
 
-from backtester.utils.types import (
+from utils.types import (
     MarketState, PositionState, Trade, Side
 )
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.utils.error_handler import BacktestErrorHandler
-from backtester.utils.exceptions import PositionError
+from configs.backtester_config import BacktestConfig
+from utils.error_handler import BacktestErrorHandler
+from utils.exceptions import PositionError
 
 
 class PositionManager:

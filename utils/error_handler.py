@@ -5,8 +5,8 @@ import pandas as pd
 import logging
 import json
 
-from backtester.utils.exceptions import MarketDataError, SignalError, OrderError, PositionError
-from backtester.utils.types import MarketState, BacktestState
+from utils.exceptions import MarketDataError, SignalError, OrderError, PositionError
+from utils.types import MarketState, BacktestState
 
 class BacktestErrorType(Enum):
     """Types of backtest errors"""

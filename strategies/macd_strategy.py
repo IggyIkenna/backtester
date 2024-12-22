@@ -1,10 +1,10 @@
 from typing import List, Dict, Optional
 import numpy as np
 
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.strategies.base_strategy import Strategy
-from backtester.utils.exceptions import StrategyError
-from backtester.utils.types import MarketState, BacktestState, Signal, Side, OrderType, SignalType
+from configs.backtester_config import BacktestConfig
+from strategies.base_strategy import Strategy
+from utils.exceptions import StrategyError
+from utils.types import MarketState, BacktestState, Signal, Side, OrderType, SignalType
 
 
 class MACDStrategy(Strategy):

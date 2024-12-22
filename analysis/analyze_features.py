@@ -4,7 +4,7 @@ from plotly.subplots import make_subplots
 import numpy as np
 from pathlib import Path
 import json
-from backtester.configs.backtester_config import FeatureGroupTypes
+from configs.backtester_config import FeatureGroupTypes
 from typing import Union, List
 from matplotlib.patches import Rectangle
 from matplotlib.collections import PatchCollection

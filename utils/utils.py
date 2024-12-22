@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Union, Tuple, Any
 import pandas as pd
 from datetime import datetime, timedelta
 from enum import Enum
-from backtester.utils.exceptions import ValidationError, ConfigurationError
+from utils.exceptions import ValidationError, ConfigurationError
 
 
 def period_to_seconds(period: str) -> int:

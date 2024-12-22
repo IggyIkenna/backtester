@@ -4,8 +4,8 @@ import pandas as pd
 from pathlib import Path
 import logging
 import numpy as np
-from backtester.configs.backtester_config import FeatureGroupTypes
-from backtester.utils.feature_names import get_feature_name
+from configs.backtester_config import FeatureGroupTypes
+from utils.feature_names import get_feature_name
 
 
 class FeatureCalculator(ABC):

@@ -4,10 +4,10 @@ import pandas as pd
 import logging
 import numpy as np
 
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.utils.types import Signal, Side, OrderType, SignalType, Trade, MarketState, BacktestState
-from backtester.utils.exceptions import ValidationError, StrategyError
-from backtester.utils.error_handler import BacktestErrorHandler
+from configs.backtester_config import BacktestConfig
+from utils.types import Signal, Side, OrderType, SignalType, Trade, MarketState, BacktestState
+from utils.exceptions import ValidationError, StrategyError
+from utils.error_handler import BacktestErrorHandler
 
 
 class Strategy(ABC):
@@ -40,7 +40,7 @@ class Strategy(ABC):
     
     def __init__(self, config: BacktestConfig):
         self.config = config
-        self.logger = logging.getLogger(__name__)  # Will be 'backtester.strategies.base_strategy'
+        self.logger = logging.getLogger(__name__)  # Will be 'strategies.base_strategy'
         self.error_handler = BacktestErrorHandler(config, self.logger)
         
         # Log trading time configuration

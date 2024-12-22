@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 import pandas as pd
 import numpy as np
-from backtester.feature_calculators.base import FeatureCalculator
+from feature_calculators.base import FeatureCalculator
 import logging
 
 class TimeRangeCalculator(FeatureCalculator):

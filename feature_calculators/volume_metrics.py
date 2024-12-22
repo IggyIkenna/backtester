@@ -1,4 +1,4 @@
-from backtester.feature_calculators.categorical_base import CategoricalFeatureCalculator
+from feature_calculators.categorical_base import CategoricalFeatureCalculator
 import pandas as pd
 import numpy as np
 from typing import Dict, List, Optional

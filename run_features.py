@@ -3,31 +3,31 @@ import logging
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import List, Dict, Union
-from backtester.feature_calculators.base import FeatureCalculator
-from backtester.feature_calculators.macd import MACDFeatureCalculator
-from backtester.feature_calculators.stochastic import StochasticFeatureCalculator
-from backtester.feature_calculators.bollinger import BollingerBandsCalculator
-from backtester.feature_calculators.candle_patterns import CandlePatternCalculator
-from backtester.feature_calculators.seasonality import SeasonalityCalculator
-from backtester.feature_calculators.time_ranges import TimeRangeCalculator
-from backtester.feature_calculators.volume_metrics import VolumeMetricsCalculator
-from backtester.feature_calculators.volume_profile import VolumeProfileCalculator
-from backtester.feature_calculators.volume_momentum import VolumeMomentumCalculator
-from backtester.feature_calculators.vwap import VWAPCalculator
-from backtester.feature_calculators.alternative_data import AlternativeDataCalculator
-from backtester.feature_calculators.rsi import RSIFeatureCalculator
-from backtester.feature_calculators.price_levels import PriceLevelsCalculator
-from backtester.feature_calculators.market_structure import MarketStructureCalculator
-from backtester.feature_calculators.streaks import StreaksCalculator
-from backtester.feature_calculators.volatility_regime import VolatilityRegimeCalculator
-from backtester.feature_calculators.funding_rates import FundingRateCalculator
-from backtester.feature_calculators.returns import ReturnFeatureCalculator
-from backtester.feature_calculators.relationship import RelationshipFeatureCalculator
+from feature_calculators.base import FeatureCalculator
+from feature_calculators.macd import MACDFeatureCalculator
+from feature_calculators.stochastic import StochasticFeatureCalculator
+from feature_calculators.bollinger import BollingerBandsCalculator
+from feature_calculators.candle_patterns import CandlePatternCalculator
+from feature_calculators.seasonality import SeasonalityCalculator
+from feature_calculators.time_ranges import TimeRangeCalculator
+from feature_calculators.volume_metrics import VolumeMetricsCalculator
+from feature_calculators.volume_profile import VolumeProfileCalculator
+from feature_calculators.volume_momentum import VolumeMomentumCalculator
+from feature_calculators.vwap import VWAPCalculator
+from feature_calculators.alternative_data import AlternativeDataCalculator
+from feature_calculators.rsi import RSIFeatureCalculator
+from feature_calculators.price_levels import PriceLevelsCalculator
+from feature_calculators.market_structure import MarketStructureCalculator
+from feature_calculators.streaks import StreaksCalculator
+from feature_calculators.volatility_regime import VolatilityRegimeCalculator
+from feature_calculators.funding_rates import FundingRateCalculator
+from feature_calculators.returns import ReturnFeatureCalculator
+from feature_calculators.relationship import RelationshipFeatureCalculator
 
 import numpy as np
 import time
 import json
-from backtester.configs.backtester_config import FeatureGroupTypes
+from configs.backtester_config import FeatureGroupTypes
 
 class FeatureProcessor:
     """Process and save multiple technical features"""

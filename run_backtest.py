@@ -4,14 +4,14 @@ from pathlib import Path
 import pandas as pd
 from typing import Dict
 
-from backtester.backtesting import Backtester
-from backtester.strategies.macd_strategy import MACDStrategy
-from backtester.execution_engine import ExecutionEngine
-from backtester.position_manager import PositionManager
-from backtester.risk_manager import RiskManager
-from backtester.output_handler import OutputHandler
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.utils.types import MarketState, BacktestState
+from backtesting import Backtester
+from strategies.macd_strategy import MACDStrategy
+from execution_engine import ExecutionEngine
+from position_manager import PositionManager
+from risk_manager import RiskManager
+from output_handler import OutputHandler
+from configs.backtester_config import BacktestConfig
+from utils.types import MarketState, BacktestState
 
 
 def setup_logging(config: BacktestConfig) -> None:
@@ -30,13 +30,13 @@ def setup_logging(config: BacktestConfig) -> None:
     )
     
     # Set levels for specific components if needed
-    logging.getLogger('backtester.strategies.base_strategy').setLevel(config.log_level)
-    logging.getLogger('backtester.strategies.macd_strategy').setLevel(config.log_level)
-    logging.getLogger('backtester.execution_engine').setLevel(config.log_level)
-    logging.getLogger('backtester.position_manager').setLevel(config.log_level)
-    logging.getLogger('backtester.risk_manager').setLevel(config.log_level)
-    logging.getLogger('backtester.output_handler').setLevel(config.log_level)
-    logging.getLogger('backtester.backtesting').setLevel(config.log_level)
+    logging.getLogger('strategies.base_strategy').setLevel(config.log_level)
+    logging.getLogger('strategies.macd_strategy').setLevel(config.log_level)
+    logging.getLogger('execution_engine').setLevel(config.log_level)
+    logging.getLogger('position_manager').setLevel(config.log_level)
+    logging.getLogger('risk_manager').setLevel(config.log_level)
+    logging.getLogger('output_handler').setLevel(config.log_level)
+    logging.getLogger('backtesting').setLevel(config.log_level)
 
 
 def load_market_data(config: BacktestConfig) -> pd.DataFrame:
@@ -96,7 +96,7 @@ def main():
         )
         
         # Run backtest
-        results: BacktestState = backtester.run(market_df)
+        results: BacktestState = run(market_df)
         
         # Generate output
         output_handler.save_results()

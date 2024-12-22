@@ -1,4 +1,4 @@
-from backtester.feature_calculators.base import FeatureCalculator
+from feature_calculators.base import FeatureCalculator
 import pandas as pd
 import numpy as np
 from typing import List, Dict, Optional, Tuple

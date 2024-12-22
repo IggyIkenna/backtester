@@ -1,6 +1,6 @@
 from typing import List, Callable
 import pandas as pd
-from backtester.feature_calculators.base import FeatureCalculator
+from feature_calculators.base import FeatureCalculator
 
 class CategoricalFeatureCalculator(FeatureCalculator):
     def __init__(self, timeframe: str, mode: str = "discrete", excluded_seasons: List[str] = None):

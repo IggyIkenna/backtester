@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from backtester.configs.data_catalog import DataCatalog
+from configs.data_catalog import DataCatalog
 
 class CoinglassCollector:
     def __init__(self, api_key: str = "dc210e2151d94a2f9cfcaac2aad85370", min_liquidation_intensity: float = 0.5e10):

@@ -161,7 +161,7 @@ utils.types
 ├── state.OrderState
 └── state.BacktestState
 └── risk_manager.RiskManager
-└── backtester.Backtester
+└── Backtester
 
 
 

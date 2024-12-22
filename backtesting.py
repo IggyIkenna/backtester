@@ -5,17 +5,17 @@ import pandas as pd
 import logging
 from datetime import datetime
 
-from backtester.utils.types import (
+from utils.types import (
     MarketState, BacktestState, PositionState, OrderState,
     Trade, Signal, Side, OrderType, OrderStatus
 )
-from backtester.execution_engine import ExecutionEngine
-from backtester.position_manager import PositionManager
-from backtester.strategies.base_strategy import Strategy
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.risk_manager import RiskManager
-from backtester.output_handler import OutputHandler
-from backtester.utils.error_handler import BacktestErrorHandler
+from execution_engine import ExecutionEngine
+from position_manager import PositionManager
+from strategies.base_strategy import Strategy
+from configs.backtester_config import BacktestConfig
+from risk_manager import RiskManager
+from output_handler import OutputHandler
+from utils.error_handler import BacktestErrorHandler
 
 class Backtester:
     """Main backtesting engine with state management"""

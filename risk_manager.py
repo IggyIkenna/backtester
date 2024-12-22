@@ -4,13 +4,13 @@ import logging
 import numpy as np
 import pandas as pd
 
-from backtester.utils.types import (
+from utils.types import (
     RiskMetrics, BacktestState, Signal,
     Side, OrderType, SignalType, TradingState
 )
-from backtester.configs.backtester_config import BacktestConfig
-from backtester.utils.exceptions import ValidationError, StateError
-from backtester.utils.error_handler import BacktestErrorHandler
+from configs.backtester_config import BacktestConfig
+from utils.exceptions import ValidationError, StateError
+from utils.error_handler import BacktestErrorHandler
 
 
 class RiskManager:
