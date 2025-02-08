@@ -50,7 +50,7 @@ class AlternativeDataCalculator(FeatureCalculator):
     def _load_vix_data(self) -> pd.DataFrame:
         """Load VIX data from hourly file"""
         try:
-            vix_file = Path("/Users/ikennaigboaka/Documents/repos/central-market-data-service/backtester/data/raw/market_data_2425d_20241217_022924/cboe/VIX_full_1hour.txt")
+            vix_file = Path("/Users/ikennaigboaka/Documents/repos/central-market-data-service/data/raw/market_data_2425d_20241217_022924/cboe/VIX_full_1hour.txt")
 
 
             if not vix_file.exists():
